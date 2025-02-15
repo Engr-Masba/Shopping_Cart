@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hollywood Automobile</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand fw-bold" href="#">Hollywood Automobile</a>
+
+        <!-- Center Section (Search Box) -->
+        <form class="form-inline mx-auto">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search products..." aria-label="Search" id="search-box">
+            <button class="btn btn-success my-2 my-sm-0" type="button" id="search-button">Search</button>
+        </form>
+
+        <!-- Right Section (Products and Cart) -->
+        <div class="navbar-nav">
+            <a class="nav-link" href="#" id="view-products">Home</a>
+            <a class="nav-link" href="#" id="view-products">Products</a>
+            <a class="nav-link text-success fw-bold" href="#" id="view-products">Today's Deals</a>
+            <a class="nav-link text-warning" href="#" id="view-cart"><i class="fa-solid fa-cart-shopping"></i> Cart (<span id="cart-count">0</span>)</a>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Language</a>
+            <a class="nav-link" href="#"><i class="bi bi-person-circle"></i> Account</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mt-4" id="main-content">
+        <div id="product-list" class="row"></div>
+    </main>
+
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cart-modal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel">Your Cart</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="cart-items"></div>
+                    <p>Total: <span id="total-price">0.00</span> tk</p>
+                    <button id="clear-cart" class="btn btn-secondary" style="display: none;">Clear Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="py-4 mt-4">
+        <div class="container text-center">
+            <div class="mb-3">
+                <p>Follow us on:</p>
+                <a href="#" class="me-3"><i class="fa-brands fa-facebook fa-2x"></i></a>
+                <a href="#" class="me-3"><i class="fa-brands fa-instagram fa-2x"></i></a>
+                <a href="#" class="me-3"><i class="fa-brands fa-twitter fa-2x"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin fa-2x"></i></a>
+            </div>
+
+            <p>&copy; 2025 Hollywood Automobile. All Rights Reserved.</p>
+
+            <div>   
+                <a href="#" class="text-dark me-3">Privacy Policy</a>
+                <a href="#" class="text-dark me-3">Terms of Service</a>
+                <a href="#" class="text-dark">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
