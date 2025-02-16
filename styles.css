@@ -1,22 +1,11 @@
-.navbar-nav {
-    margin-left: auto;
-}
-
 .product-card {
     cursor: pointer;
-    transition: all 0.3s ease;
 }
-
-.product-card:hover {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-}
-
-.modal-content {
-    text-align: center;
-}
-
 .product-image {
-    width: 100%;
     height: 200px;
     object-fit: cover;
+}
+.promo-message {
+    color: red;
+    display: none;
 }

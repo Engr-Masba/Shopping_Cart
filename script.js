@@ -3,6 +3,14 @@ const products = [
     { id: 2, name: "Product 2", price: 3000, description: "Description of Product 2", image: "images/5-NKN_9bdbeb86-d52a-400e-ae3e-8e223080fcf9.webp" }
 ];
 let cart = [];
+let total = 0;
+let appliedPromoCode = null;
+
+// Promo Code Details
+const promoCodes = {
+    "ostad10": 10,
+    "ostad5": 5
+};
 
 // Load cart from localStorage if available
 function loadCart() {
@@ -87,12 +95,12 @@ function updateCartCount() {
     document.getElementById("cart-count").innerText = cart.length;
 }
 
-// Display cart items in modal
+// Display cart items in modal and calculate totals
 function updateCartDisplay() {
     const cartItemsContainer = document.getElementById("cart-items");
     const clearCartButton = document.getElementById("clear-cart");
     cartItemsContainer.innerHTML = "";
-    let total = 0;
+    let subtotal = 0;
     const cartSummary = {};
 
     cart.forEach(item => {
@@ -110,18 +118,51 @@ function updateCartDisplay() {
     }
 
     Object.values(cartSummary).forEach(item => {
-        total += item.price * item.quantity;
+        subtotal += item.price * item.quantity;
         const itemDiv = document.createElement("div");
         itemDiv.innerHTML = `<p>${item.name} x ${item.quantity} - ${item.price * item.quantity } tk</p>`;
         cartItemsContainer.appendChild(itemDiv);
     });
-    document.getElementById("total-price").innerText = total.toFixed(2);
+
+    total = subtotal; // Set total for promo code calculations
+    document.getElementById("total-price").innerText = subtotal.toFixed(2);
+    document.getElementById("subtotal-price").innerText = subtotal.toFixed(2);
+    document.getElementById("discount-amount").innerText = "0.00"; // Reset discount
+    appliedPromoCode = null; // Reset promo code on cart update
 }
 
-document.getElementById("view-cart").addEventListener("click", () => {
-    $('#cart-modal').modal('show');
+// Apply Promo Code
+document.getElementById("apply-promo").addEventListener("click", () => {
+    const promoCode = document.getElementById("promo-code").value.toLowerCase();
+    
+    if (promoCodes[promoCode] && promoCode !== appliedPromoCode) {
+        appliedPromoCode = promoCode;
+        const discountPercent = promoCodes[promoCode];
+        const discountAmount = (total * discountPercent) / 100;
+        updatePrices(discountAmount, discountPercent);
+        document.getElementById("promo-message").style.display = "none";
+    } else if (appliedPromoCode === promoCode) {
+        document.getElementById("promo-message").textContent = "Promo code already applied.";
+        document.getElementById("promo-message").style.display = "block";
+    } else {
+        document.getElementById("promo-message").textContent = "Invalid promo code!";
+        document.getElementById("promo-message").style.display = "block";
+    }
 });
 
+// Function to update prices with discount
+function updatePrices(discountAmount, discountPercent) {
+    const subtotal = total;
+    const finalTotal = subtotal - discountAmount;
+
+    document.getElementById("subtotal-price").innerText = subtotal.toFixed(2);
+    document.getElementById("discount-amount").innerText = discountAmount.toFixed(2);
+    document.getElementById("total-price").innerText = finalTotal.toFixed(2);
+
+    alert(`Promo code applied! You got a ${discountPercent}% discount.`);
+}
+
+// Clear Cart Functionality
 document.getElementById("clear-cart").addEventListener("click", () => {
     cart = [];
     updateCartCount();
